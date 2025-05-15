@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: ReaderPro-Medium, 'Reader Pro';
+        font-size: 12px;
+        font-variation-settings: 'wght' 500;
+        font-weight: 500;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #231f20;
+      }
+
+      .cls-3 {
+        letter-spacing: 0em;
+      }
+
+      .cls-4 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="cls-2" d="M0,0c0,27.62,22.39,50.02,50,50.02V0H0Z"/>
+    <path class="cls-2" d="M100,50.02C127.61,50.02,150,27.62,150,0H50c0,27.62,22.39,50.02,50,50.02Z"/>
+    <path class="cls-2" d="M97.27,99.96h-47.27c0,27.62,22.39,50.02,50,50.02s50-22.39,50-50.02h-47.27c26.34-1.42,47.27-23.24,47.27-49.94H50c0,26.71,20.92,48.52,47.27,49.94Z"/>
+    <path class="cls-2" d="M200,0h-50v50.02C177.61,50.02,200,27.62,200,0Z"/>
+    <path class="cls-2" d="M200,50.02h-50v99.96c27.61,0,50-22.39,50-50.02h-47.27c26.34-1.42,47.27-23.24,47.27-49.94Z"/>
+    <path class="cls-2" d="M50,99.96v-49.94H0c0,26.71,20.92,48.52,47.27,49.94H0c0,27.62,22.39,50.02,50,50.02v-50.02Z"/>
+    <path class="cls-2" d="M50,200v-50.02H0c0,27.62,22.39,50.02,50,50.02Z"/>
+    <path class="cls-2" d="M50,149.98c0,27.62,22.39,50.02,50,50.02s50-22.39,50-50.02H50Z"/>
+    <path class="cls-2" d="M200,149.98h-50v50.02c27.61,0,50-22.39,50-50.02Z"/>
+  </g>
+  <text class="cls-1" transform="translate(51.25 -41.48)"><tspan x="0" y="0">MISSED </tspan><tspan class="cls-5" x="49.64" y="0">E</tspan><tspan class="cls-3" x="57.16" y="0">VEN</tspan><tspan class="cls-4" x="81.66" y="0">T</tspan><tspan x="89.4" y="0">S</tspan></text>
+</svg>

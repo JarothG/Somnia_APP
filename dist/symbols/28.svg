@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M50,0H0v50c27.61,0,50-22.39,50-50Z"/>
+  <path class="cls-1" d="M50,50H0v50c27.61,0,50-22.39,50-50Z"/>
+  <path class="cls-1" d="M0,100v50h50C50,122.39,27.61,100,0,100Z"/>
+  <path class="cls-1" d="M0,150v50h50C50,172.39,27.61,150,0,150Z"/>
+  <path class="cls-1" d="M100,0h-50v50c27.61,0,50-22.39,50-50Z"/>
+  <path class="cls-1" d="M100,50h-50v50c27.61,0,50-22.39,50-50Z"/>
+  <path class="cls-1" d="M50,100v50h50c0-27.61-22.39-50-50-50Z"/>
+  <path class="cls-1" d="M50,150v50h50c0-27.61-22.39-50-50-50Z"/>
+  <path class="cls-1" d="M150,50V0h-50c0,27.61,22.39,50,50,50Z"/>
+  <path class="cls-1" d="M150,100c-27.61,0-50,22.39-50,50h50V50h-50c0,27.61,22.39,50,50,50Z"/>
+  <path class="cls-1" d="M150,150h50v-50c-27.61,0-50,22.39-50,50Z"/>
+  <path class="cls-1" d="M100,200h50v-50c-27.61,0-50,22.39-50,50Z"/>
+  <path class="cls-1" d="M150,200h50v-50c-27.61,0-50,22.39-50,50Z"/>
+  <path class="cls-1" d="M150,0c0,27.61,22.39,50,50,50V0h-50Z"/>
+  <path class="cls-1" d="M200,100v-50h-50c0,27.61,22.39,50,50,50Z"/>
+</svg>
