@@ -8,18 +8,159 @@
         <script type="module" crossorigin src="/assets/index-BMBsDeFx.js"></script>
         <link href="css/theme.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" crossorigin href="/assets/index-BoKK2JHz.css"/>
-        <style>body { margin: 0; font-family: 'Readex Pro', sans-serif; } #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: black; display: none; z-index: 9999; align-items: center; justify-content: center; flex-direction: column; } #overlay p { color: white; font-size: 55pt; margin: 0 0 40px 0; user-select: none; text-align: center; } #logoChanging { width: 100px; height: auto; user-select: none; } #renderDreamBtn { text-transform: uppercase; padding: 20px; font-size: 15px; cursor: pointer; background: white; border: none; color: black; transition: all 0.3s ease; border-radius: 9999px; font-weight: 100; } #renderDreamBtn:hover { background-color: black; color: white; border: 2px solid white; } #dreamInput { font-size: 73.33px; height: 240px;  /* Roughly 3 lines at this font size */ resize: none; width: 100%; box-sizing: border-box; }</style>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Readex+Pro&display=swap">
+        <style>
+            html {
+                height: 100%;
+            }
+            body { 
+                margin: 0; 
+                font-family: 'Readex Pro', sans-serif; 
+                display: flex;
+                flex-direction: column;
+                align-items: center;    
+                justify-content: center; 
+                min-height: 100%;      
+                background-color: #0f0f0f; 
+                color: white; 
+            }
+
+            .main-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center; 
+                width: 90%;          
+                max-width: 800px;    
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            #overlay { 
+                position: fixed; 
+                top: 0; 
+                left: 0; 
+                width: 100%; 
+                height: 100%; 
+                background-color: black; 
+                display: none; 
+                z-index: 9999; 
+                align-items: center; 
+                justify-content: center; 
+                flex-direction: column; 
+            }
+            #overlay p { 
+                color: white; 
+                font-size: 55pt; 
+                margin: 0 0 40px 0; 
+                user-select: none; 
+                text-align: center; 
+            }
+            #logoChanging { 
+                width: 100px; 
+                height: auto; 
+                user-select: none; 
+            }
+            #renderDreamBtn { 
+                text-transform: uppercase; 
+                padding: 20px; 
+                font-size: 15px; 
+                cursor: pointer; 
+                background: white; 
+                border: none; 
+                color: black; 
+                transition: all 0.3s ease; 
+                border-radius: 9999px; 
+                font-weight: 100; 
+                margin-top: 20px; 
+            }
+            #renderDreamBtn:hover { 
+                background-color: black; 
+                color: white; 
+                border: 2px solid white; 
+            }
+
+            #dreamInput { 
+                resize: none; 
+                width: 100%; 
+                box-sizing: border-box; 
+                font-weight: normal; 
+
+                font-family: 'Readex Pro', sans-serif; 
+                /* MODIFIED: Added !important for diagnostics - REMOVE after identifying override */
+                font-size: 55pt !important; /* Check if this forces the size, then find the overriding style */
+                line-height: 1.2; 
+                text-align: center;
+                color: #333; 
+                background-color: #f0f0f0; 
+                border: 1px solid #ccc;
+                border-radius: 10px; 
+                /* MODIFIED: Adjusted padding to try and fix vertical alignment */
+                padding: 25px 20px 15px 20px; /* Top: 25px, R: 20px, B: 15px, L: 20px */       
+                height: 304px;  /* (3 lines * (55pt * 1.2 * ~1.333px/pt)) + (25px + 15px padding) */
+            }
+            #dreamInput::placeholder {
+                color: #aaa; 
+                text-align: center;
+                font-size: 55pt; 
+                font-family: 'Readex Pro', sans-serif;
+                font-weight: normal;
+                line-height: 1.2;    
+            }
+
+            .loading-indicator {
+                display: none; 
+                text-align: center;
+                margin-top: 20px;
+                color: white; 
+            }
+            .spinner {
+                border: 4px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                border-top-color: #fff;
+                width: 40px;
+                height: 40px;
+                animation: spin 1s ease-infinite;
+                margin: 0 auto 10px auto;
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            
+            .grid-container, .analysis-container {
+                display: none; 
+                margin-top: 20px;
+            }
+            #downloadBtn { 
+                text-transform: uppercase; 
+                padding: 15px; 
+                font-size: 14px; 
+                cursor: pointer; 
+                background: white; 
+                border: none; 
+                color: black; 
+                transition: all 0.3s ease; 
+                border-radius: 9999px; 
+                font-weight: 100;
+                margin-top: 20px;
+            }
+            #downloadBtn:hover {
+                 background-color: black; 
+                color: white; 
+                border: 2px solid white;
+            }
+
+        </style>
     </head>
     <body>
         <div class="main-container">
-            <textarea name="text" wrap="soft" id="dreamInput" placeholder="Tell me what you dreamt about..." autofocus style="font-weight: normal;"></textarea>
+            <textarea name="text" wrap="soft" id="dreamInput" placeholder="Tell me what you dreamt about..." autofocus></textarea>
             <div class="loading-indicator" id="loadingIndicator">
                 <div class="spinner"></div>
                 <p>Analyzing your dream...</p>
             </div>
             <button id="renderDreamBtn">Generate your dream pattern</button>
         </div>
+
         <div class="grid-container">
             <svg id="grid" width="800" height="1000" xmlns="http://www.w3.org/2000/svg" style="background-color: #ffffff;">
                 <defs>
@@ -31,75 +172,78 @@
             </svg>
             <button id="downloadBtn">Download as Vector PDF</button>
         </div>
-        <!-- Dream analysis -->
+        
         <div class="analysis-container" id="analysisContainer"></div>
-        <!-- Loading overlay -->
+        
         <div id="overlay">
-            <p>Your pattern is generating...</p>
+            <p>Your pattern is generating...</p> 
             <img id="logoChanging" src="/Loading_Logo2/loading%20(1).svg" alt="Loading Icon"/>
         </div>
+        
         <script>
-      const iconPaths = [
+    const iconPaths = [
         "/Loading_Logo2/loading%20(1).svg",
         "/Loading_Logo2/loading%20(2).svg",
         "/Loading_Logo2/loading%20(3).svg",
         "/Loading_Logo2/loading%20(4).svg",
-      ];
+    ];
 
-      let iconIndex = 0;
-      setInterval(() => {
+    let iconIndex = 0;
+    setInterval(() => {
         const changingLogo = document.getElementById("logoChanging");
         if (changingLogo) {
-          changingLogo.src = iconPaths[iconIndex];
-          iconIndex = (iconIndex + 1) % iconPaths.length;
+        changingLogo.src = iconPaths[iconIndex];
+        iconIndex = (iconIndex + 1) % iconPaths.length;
         }
-      }, 1000);
+    }, 1000); 
 
-      document
+    document
         .getElementById("renderDreamBtn")
         .addEventListener("click", () => {
-          const dreamText = document
+        const dreamText = document
             .getElementById("dreamInput")
             .value.trim();
-          if (!dreamText) {
+        if (!dreamText) {
             alert("Please enter your dream first.");
             return;
-          }
+        }
 
-          document.getElementById("overlay").style.display = "flex";
+        const loadingIndicator = document.getElementById("loadingIndicator");
+        const overlay = document.getElementById("overlay");
+        
+        if(loadingIndicator) loadingIndicator.style.display = "block";
+        if(overlay) overlay.style.display = "flex";
 
-          const svgElement = document.getElementById("grid");
-          const maxAttempts = 100;
-          let attempt = 0;
+        const svgElement = document.getElementById("grid");
+        const maxWaitTime = 50000; 
+        const checkInterval = 500; 
+        let timeElapsed = 0;
 
-          const checkIfReady = setInterval(() => {
-            const hasShapes =
-              svgElement.querySelectorAll("path, rect, circle, polygon, g")
-                .length > 0;
+        const checkIfReady = setInterval(() => {
+            timeElapsed += checkInterval;
+            const hasShapes = svgElement.querySelectorAll("path, rect, circle, polygon, g, image, text").length > 0; 
 
-            if (hasShapes || attempt >= maxAttempts) {
-              clearInterval(checkIfReady);
+            if (hasShapes || timeElapsed >= maxWaitTime) {
+                clearInterval(checkIfReady);
+                if(loadingIndicator) loadingIndicator.style.display = "none"; 
 
-              if (!hasShapes) {
-                alert("Pattern generation failed or took too long.");
-                document.getElementById("overlay").style.display = "none";
-                return;
-              }
+                if (!hasShapes && timeElapsed >= maxWaitTime) { 
+                    alert("Pattern generation failed or took too long. Please try rephrasing your dream or try again later.");
+                    if(overlay) overlay.style.display = "none";
+                    return;
+                }
+            
+                const analysisContainerElement = document.getElementById("analysisContainer");
+                const analysisText = analysisContainerElement ? (analysisContainerElement.innerText || analysisContainerElement.textContent || "").trim() : "";
 
-              const analysisText =
-                document.getElementById("analysisContainer")?.innerText || "";
+                localStorage.setItem("dreamText", dreamText);
+                localStorage.setItem("dreamSVG", svgElement.outerHTML);
+                localStorage.setItem("dreamAnalysis", analysisText); 
 
-              localStorage.setItem("dreamText", dreamText);
-              localStorage.setItem("dreamSVG", svgElement.outerHTML);
-              localStorage.setItem("dreamAnalysis", analysisText);
-
-              window.location.href = "result.html";
+                window.location.href = "result.html";
             }
-
-            attempt++;
-          }, 500);
+        }, checkInterval);
         });
-    </script>
+        </script>
     </body>
 </html>
-
