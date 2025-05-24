@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Your Dream Pattern</title>
+        <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        font-family: sans-serif;
+        background: #000;
+        color: #fff;
+        overflow: hidden;
+    }
+    body {
+        display: flex;
+        height: 100vh;
+        padding: 1rem;
+        gap: 1rem;
+        align-items: stretch;
+    }
+    .left {
+        flex-shrink: 0;
+        width: 811px;
+        max-width: 50vw;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto; 
+        padding-right: 1rem;
+        border-right: 1px solid #444;
+        max-height: 100vh;
+    }
+    .logo-container {
+        position: relative;
+        width: 100px;
+        height: 90px;
+        margin-bottom: 1rem;
+        flex-shrink: 0;
+    }
+    /* .logo styles */
+    .title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        flex-shrink: 0;
+    }
+    .section-container {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+    .box {
+        flex: 1;
+        padding: 0; 
+        font-family: monospace;
+        white-space: pre-wrap; 
+    }
+    .detailed-analysis-scrollable { 
+        font-family: monospace; 
+        line-height: 1.4em;     
+        height: calc(10 * 1.4em); 
+        overflow-y: auto;         
+        white-space: pre-wrap;
+        /* Ensured no border for the "grey line" */
+        border: none; 
+    }
+
+    .symbols {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    .symbol-box {
+        text-align: center;
+        flex: 1;
+    }
+    .symbol-text-label {
+        margin-bottom: 8px; 
+    }
+    .symbol-box img {
+        width: 100%;
+        max-width: 100px;
+        filter: brightness(0) invert(1);
+    }
+    .right {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        max-height: 100vh;
+        overflow: hidden;
+        width: -1px;
+        margin-left: 55px;
+    }
+    #svgContainer {
+        position: relative;
+        background: transparent;
+        border-radius: 1rem;
+        border: none;
+        box-sizing: border-box;
+        width: auto;
+        height: 80vh;
+        aspect-ratio: 64 / 80;
+        overflow: hidden;
+    }
+    #svgWrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center center;
+        transform: translate(-50%, -50%) scale(0.5);
+        overflow: visible;
+        width: auto;
+        height: auto;
+        display: block;
+    }
+    #svgContainer svg {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: none;
+        max-height: none;
+        overflow: visible;
+    }
+    button { 
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        background: #fff; 
+        color: #000;      
+        border: 1px solid transparent; /* To prevent jump on hover when border is added */
+        cursor: pointer;
+        border-radius: 606.25rem;
+        font-weight: 600;
+        z-index: 10;
+        user-select: none;
+        text-transform: uppercase;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s; 
+    }
+    button:hover {
+        background: #000;       
+        color: #fff;           
+        border-color: #fff; /* Use border-color with the existing border */
+    }
+        </style>
+    </head>
+    <body>
+        <div class="left">
+            <div class="logo-container"></div>
+            <div class="title">Dream Analysis</div>
+            <div class="section-container">
+                <div class="box" id="colourGradientBox"></div>
+                <div class="box" id="realismBox"></div>                 
+            </div>
+            <div class="symbols" id="symbolsContainer"></div>             
+        </div>
+        <button onclick="window.location.href='index.html'">Try Another Dream</button>
+        <div class="right">
+            <div id="svgContainer"></div>
+        </div>
+        <script>
+    const svgContainer = document.getElementById("svgContainer");
+    const colourGradientBox = document.getElementById("colourGradientBox");
+    const realismBox = document.getElementById("realismBox");
+    const symbolsContainer = document.getElementById("symbolsContainer");
+
+    function getHexColorInterpretation(hex) {
+        if (!hex || hex === 'N/A') {
+            return { name: 'N/A', description: 'Color data not available.' };
+        }
+        // Ensure hex is a string before using string methods
+        const hexString = String(hex);
+
+        if (hexString.length !== 7 && hexString.length !== 4) { 
+            return { name: `Color (${hexString})`, description: 'Unrecognized color format.' };
+        }
+
+        let r_hex, g_hex, b_hex;
+        if (hexString.length === 4) { 
+            r_hex = hexString[1] + hexString[1];
+            g_hex = hexString[2] + hexString[2];
+            b_hex = hexString[3] + hexString[3];
+        } else {
+            r_hex = hexString.slice(1, 3);
+            g_hex = hexString.slice(3, 5);
+            b_hex = hexString.slice(5, 7);
+        }
+
+        const r = parseInt(r_hex, 16);
+        const g = parseInt(g_hex, 16);
+        const b = parseInt(b_hex, 16);
+
+        if (isNaN(r) || isNaN(g) || isNaN(b)) { // Check if parsing failed
+            return { name: `Color (${hexString})`, description: 'Invalid color code.' };
+        }
+
+        let colorName = `Color (${hexString})`; // Default to hex if no specific category fits well
+        let interpretation = "Colors in dreams can be highly personal. This specific shade might hold unique meaning for you.";
+
+        const L = 0.2126 * r + 0.7152 * g + 0.0722 * b; 
+
+        if (L < 30) {
+            colorName = "Very Dark";
+            if (r > g && r > b) colorName = "Dark Red-ish"; 
+            else if (b > r && b > g) colorName = "Dark Blue-ish";
+            else if (g > r && g > b) colorName = "Dark Green-ish";
+            interpretation = "Dark shades can sometimes represent the unknown, mystery, or heavier emotions.";
+        } else if (L > 220) {
+            colorName = "Very Light / White";
+            interpretation = "Light shades or white can symbolize clarity, purity, peace, or new beginnings.";
+        } else if (Math.abs(r - g) < 25 && Math.abs(r - b) < 25 && Math.abs(g - b) < 25) { // Loosened tolerance for grey
+            colorName = "Grey-ish";
+            interpretation = "Greys can suggest neutrality, balance, indecision, or a subdued emotional state.";
+        } else if (r > g + 20 && r > b + 20) { 
+            colorName = (L < 80 ? "Dark " : (L > 180 ? "Light " : "")) + "Red";
+            interpretation = "Red often connects to strong emotions like passion, energy, anger, or warnings.";
+        } else if (g > r + 20 && g > b + 20) { 
+            colorName = (L < 80 ? "Dark " : (L > 180 ? "Light " : "")) + "Green";
+            interpretation = "Green typically relates to nature, growth, healing, harmony, or sometimes envy.";
+        } else if (b > r + 20 && b > g + 20) { 
+            colorName = (L < 80 ? "Dark " : (L > 180 ? "Light " : "")) + "Blue";
+            interpretation = "Blue can suggest calmness, sadness, intuition, stability, or peace.";
+        } else if (r > b + 20 && g > b + 20 && Math.abs(r - g) < 50) { 
+            colorName = (L < 80 ? "Dark " : (L > 180 ? "Light " : "")) + (g > r * 0.7 ? "Yellow" : "Orange"); // Adjusted yellow ratio
+            interpretation = "Yellow may symbolize happiness, intellect, or caution. Orange often represents enthusiasm, creativity, or warmth.";
+        } else if (r > g + 20 && b > g + 20 && Math.abs(r - b) < 50) { 
+             colorName = (L < 80 ? "Dark " : (L > 180 ? "Light " : "")) + "Purple/Magenta";
+             interpretation = "Purple shades can relate to luxury, spirituality, mystery, or imagination.";
+        }
+        
+        return { name: colorName, description: interpretation };
+    }
+
+    const svg = localStorage.getItem("dreamSVG");
+    
+    // MODIFIED: Safer JSON parsing
+    let analysis = {}; // Default to an empty object
+    try {
+        const analysisString = localStorage.getItem("dreamAnalysis");
+        if (analysisString && analysisString.trim() !== "") { // Check if string is not null and not empty/whitespace
+            analysis = JSON.parse(analysisString);
+        } else if (analysisString === null) {
+             // If item doesn't exist, analysis remains {} - "No dream analysis found" will show
+        } else {
+            // If item is an empty string, also treat as no data.
+            console.warn("dreamAnalysis in localStorage is an empty string.");
+        }
+    } catch (e) {
+        console.error("Error parsing dreamAnalysis from localStorage:", e);
+        // analysis remains {}, so "No dream analysis found." will be shown by the 'else' block later.
+    }
+
+    if (svg && analysis && Object.keys(analysis).length > 0) { // Added check for non-empty analysis object
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(svg, "image/svg+xml");
+        const svgEl = svgDoc.querySelector("svg");
+        if (svgEl && !svgEl.hasAttribute("preserveAspectRatio")) {
+            svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        }
+
+        svgContainer.innerHTML = "";
+        const wrapper = document.createElement("div");
+        wrapper.id = "svgWrapper";
+        if (svgEl) { 
+            wrapper.appendChild(svgEl);
+        }
+        svgContainer.appendChild(wrapper);
+
+        const startColorHex = (analysis.colorGradient && analysis.colorGradient[0]) ? analysis.colorGradient[0] : 'N/A';
+        const endColorHex = (analysis.colorGradient && analysis.colorGradient[1]) ? analysis.colorGradient[1] : 'N/A';
+
+        const startColorInfo = getHexColorInterpretation(startColorHex);
+        const endColorInfo = getHexColorInterpretation(endColorHex);
+        
+        colourGradientBox.textContent = `COLOUR AND GRADIENT
+Start Color: ${startColorHex} (${startColorInfo.name})
+  Interpretation: ${startColorInfo.description}
+
+End Color: ${endColorHex} (${endColorInfo.name})
+  Interpretation: ${endColorInfo.description}`;
+        
+        realismBox.innerHTML = `REALISM ASSESSMENT
+${analysis.realismAssessment || "N/A"}
+
+EMOTION
+${analysis.emotion || "N/A"}
+
+DETAILED ANALYSIS
+<div class="detailed-analysis-scrollable">${analysis.analysis || "N/A"}</div>`;
+
+        const symbols = analysis.symbols || [1, 1, 1, 1];
+        const symbolWords = analysis.symbolText || ["unknown", "unknown", "unknown", "unknown"];
+
+        symbolsContainer.innerHTML = symbols.map((num, i) => `
+            <div class="symbol-box">
+                <div class="symbol-text-label">${symbolWords[i]}</div>
+                <img src="/symbols/${String(num).padStart(2, '0')}.svg" alt="Symbol ${num}" />
+            </div>
+        `).join('');
+    } else {
+        // This block should now execute reliably if data is missing or parsing fails
+        colourGradientBox.textContent = "No dream analysis found or data is incomplete.";
+        if (!svg) {
+            svgContainer.innerHTML = "No SVG found."; 
+        } else {
+            // If SVG is present but analysis is not, clear previous SVG if any
+            // svgContainer.innerHTML = ""; // Or keep the old SVG if that's preferred
+        }
+        realismBox.innerHTML = ""; 
+        symbolsContainer.innerHTML = "";
+    }
+
+    // localStorage.removeItem("dreamSVG"); // Decide if you want to remove them.
+    // localStorage.removeItem("dreamAnalysis"); // If removed, refreshing will always show "No data".
+        </script>
+    </body>
+</html>
