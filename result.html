@@ -3,29 +3,29 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Your Dream Pattern</title>
-        <style>/* Custom Font Definition */@font-face { font-family: 'Reader Pro'; src: url('fonts/ReaderPro-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; } html, body { width: 100%; height: 100%; font-family: 'Reader Pro', sans-serif; background: #000; color: #fff; overflow: hidden; } body { display: flex; height: 100vh; padding: 1rem; gap: 1rem; align-items: stretch; } .left { flex-shrink: 0; width: 811px; max-width: 50vw; display: flex; flex-direction: column; overflow-y: auto; padding-right: 1rem; max-height: calc(100vh - 2rem);  /* MODIFIED: Account for body padding */ } .logo-container { position: relative; width: 100px; height: 90px; margin-bottom: 1rem; flex-shrink: 0; } .title { font-size: 22px; margin-bottom: 1rem; flex-shrink: 0; font-family: 'Readex Pro', sans-serif; font-weight: bolder; } .section-container { display: flex; gap: 1rem; margin-bottom: -3rem; flex-wrap: wrap; } .box { flex: 1; padding: 0; font-family: 'Readex Pro', sans-serif; white-space: pre-wrap; } .detailed-analysis-scrollable { font-family: 'Readex Pro', sans-serif; line-height: 1.4em; height: calc(10 * 1.4em); overflow-y: auto; white-space: pre-wrap; border: none; font-weight: 300; } .symbols { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3.5em; width: 551px; } .symbol-box { text-align: center; flex: 1; } .symbol-text-label { margin-bottom: 8px; text-transform: uppercase; font-weight: 300; } .symbol-box img { width: 100%; max-width: 100px; filter: brightness(0) invert(1); } /* MODIFIED: .right class for alignment and height */.right { flex-grow: 1; display: flex; justify-content: flex-end;  /* MODIFIED: Align #svgContainer to the right */ align-items: center; max-height: calc(100vh - 2rem);  /* MODIFIED: Account for body padding */ overflow: hidden; margin-left: 55px; } /* MODIFIED: #svgContainer - no rounded corners, height from your last code */#svgContainer { position: relative; background: transparent; border-radius: 0;  /* MODIFIED: Removed rounded corners */ border: none; box-sizing: border-box; width: auto; height: 100vh;  /* Kept as per your provided code */ aspect-ratio: 64 / 80; overflow: hidden; } /* #svgWrapper - Kept as per your provided code (with scale(0.5)) */#svgWrapper { position: absolute; top: 50%; left: 50%; transform-origin: center center; transform: translate(-50%, -50%) scale(0.67); overflow: visible; width: auto; height: auto; display: block; } /* #svgContainer svg - Kept as per your provided code */#svgContainer svg { display: block; width: auto; height: auto; max-width: none; max-height: none; overflow: visible; } button { position: absolute; bottom: 1rem; left: 1rem; padding: 0.5rem 1rem; background: #fff; color: #000; border: 1px solid transparent; cursor: pointer; border-radius: 606.25rem; font-weight: 600; z-index: 10; user-select: none; transition: background-color 0.2s, color 0.2s, border-color 0.2s; width: 260px; height: 60px; } button:hover { background: #000; color: #fff; border-color: #fff; }</style>
+        <style>/* MODIFIED: Updated @font-face for Reader Pro */@font-face { font-family: 'Reader Pro'; src: url('/fonts/ReaderPro-Regular.woff2') format('woff2'),
+                     url('/fonts/ReaderPro-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; } html, body { width: 100%; height: 100%; font-family: 'Reader Pro', sans-serif;  /* Reader Pro is now the base */ background: #000; color: #fff; overflow: hidden; } body { display: flex; height: 100vh; padding: 1rem; gap: 1rem; align-items: stretch; } .left { flex-shrink: 0; width: 811px; max-width: 50vw; display: flex; flex-direction: column; overflow-y: auto; padding-right: 1rem; max-height: calc(100vh - 2rem); } .logo-container { position: relative; width: 100px; height: 90px; margin-bottom: 1rem; flex-shrink: 0; } .title { font-size: 22px; margin-bottom: 1rem; flex-shrink: 0; font-family: 'Reader Pro', sans-serif;  /* MODIFIED */ font-weight: bolder; } .section-container { display: flex; gap: 1rem; margin-bottom: -3rem; flex-wrap: wrap; } .box { flex: 1; padding: 0; font-family: 'Reader Pro', sans-serif;  /* MODIFIED */ white-space: pre-wrap; } .detailed-analysis-scrollable { font-family: 'Reader Pro', sans-serif;  /* MODIFIED */ line-height: 1.4em; height: calc(10 * 1.4em); overflow-y: auto; white-space: pre-wrap; border: none; font-weight: 300; } .symbols { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3.5em; width: 551px; } .symbol-box { text-align: center; flex: 1; } .symbol-text-label { margin-bottom: 8px; text-transform: uppercase; font-weight: 300; } .symbol-box img { width: 100%; max-width: 100px; filter: brightness(0) invert(1); } .right { flex-grow: 1; display: flex; justify-content: flex-end; align-items: center; max-height: calc(100vh - 2rem); overflow: hidden; margin-left: 55px; } #svgContainer { position: relative; background: transparent; border-radius: 0; border: none; box-sizing: border-box; width: auto; height: 100vh; aspect-ratio: 64 / 80; overflow: hidden; } #svgWrapper { position: absolute; top: 50%; left: 50%; transform-origin: center center; transform: translate(-50%, -50%) scale(0.67); overflow: visible; width: auto; height: auto; display: block; } #svgContainer svg { display: block; width: auto; height: auto; max-width: none; max-height: none; overflow: visible; } button { position: absolute; bottom: 1rem; left: 1rem; padding: 0.5rem 1rem; background: #fff; color: #000; border: 1px solid transparent; cursor: pointer; border-radius: 606.25rem; font-weight: 600; z-index: 10; user-select: none; transition: background-color 0.2s, color 0.2s, border-color 0.2s; width: 260px; height: 60px; } button:hover { background: #000; color: #fff; border-color: #fff; }</style>
         <link href="css/theme.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Readex+Pro:wght@300;400;700&display=swap">
     </head>
     <body>
         <div class="left">
             <div class="title" style="margin-top: -30px;">DREAM ANALYSIS</div>
-            <h1 style="font-family: 'Readex Pro', sans-serif; font-size: 20px; margin-top: -10px;">DREAM ANALYSIS</h1>
+            <h1 style="font-size: 20px; margin-top: -10px;">DREAM ANALYSIS</h1> 
             <div class="section-container">
-                <div class="box" id="colourGradientBox" style="font-family: 'Readex Pro', sans-serif; margin-top: 9px;"></div>
-                <div class="box" id="realismBox" style="font-family: 'Readex Pro', sans-serif; margin-top: 9px;"></div>                 
+                <div class="box" id="colourGradientBox" style="margin-top: 9px;"></div>
+                <div class="box" id="realismBox" style="margin-top: 9px;"></div>                 
             </div>
-            <h1 style="font-family: 'Readex Pro', sans-serif; font-size: 20px;">TYPES OF SYMBOLS</h1>
+            <h1 style="font-size: 20px;">TYPES OF SYMBOLS</h1>
             <div class="symbols" id="symbolsContainer" style="margin-top: 15px;"></div>             
         </div>
-        <button onclick="window.location.href='index.html'">Try Another Dream</button>
+        <button onclick="window.location.href='index.html'">TRY ANOTHER DREAM</button>
         <div class="right">
             <div id="svgContainer"></div>
         </div>
         <script>
     // All JavaScript remains exactly as you provided in your last message
     // (customColorMap, helper functions, getHexColorInterpretation, 
-    //  localStorage logic, and DOM population)
+    //  localStorage logic, and DOM population including SVG handling)
     const svgContainer = document.getElementById("svgContainer");
     const colourGradientBox = document.getElementById("colourGradientBox");
     const realismBox = document.getElementById("realismBox");
@@ -127,8 +127,8 @@
                  if (!svgEl.hasAttribute("preserveAspectRatio")) { 
                     svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet"); 
                 }
-                // We are NOT removing width/height attributes from svgEl here,
-                // to match the behavior of the "worked with 50% scale" state.
+                // svgEl.removeAttribute('width'); // Not removing these as per going back to user's "fixed" state
+                // svgEl.removeAttribute('height');
                 wrapper.appendChild(svgEl); 
             } else { 
                 svgContainer.innerHTML = "Could not display SVG pattern.";
