@@ -5,6 +5,7 @@
         <title>Dream Patterns</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/svg2pdf.js/dist/svg2pdf.umd.min.js"></script>
+        
         <script type="module" crossorigin src="/assets/index-BMBsDeFx.js"></script>
         <link href="css/theme.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" crossorigin href="/assets/index-BoKK2JHz.css"/>
@@ -29,7 +30,7 @@
                 flex-direction: column; 
                 align-items: center; 
                 width: 95%;          
-                max-width: 1100px;  /* MODIFIED: Significantly wider */
+                max-width: 1650px;  /* MODIFIED: Increased max-width by 50% from 1100px */
                 padding: 20px; 
                 box-sizing: border-box; 
             } 
@@ -91,7 +92,7 @@
                 border: 1px solid #ccc; 
                 border-radius: 10px; 
                 padding: 25px 20px 15px 20px; 
-                height: 480px; /* MODIFIED: Increased height for ~5 lines */
+                height: 480px; /* Kept height for ~5 lines based on previous step */
             } 
             #dreamInput::placeholder { 
                 color: #aaa; 
@@ -178,7 +179,7 @@
     const iconPaths = [
         "/Loading_Logo2/loading%20(1).svg",
         "/Loading_Logo2/loading%20(2).svg",
-        "/Loading_Logo2/loading%2_0(3).svg", // Corrected potential typo if it was %2_0
+        "/Loading_Logo2/loading%20(3).svg",
         "/Loading_Logo2/loading%20(4).svg",
     ];
 
@@ -239,5 +240,5 @@
         }, checkInterval);
         });
         </script>
-    </body>
+        </body>
 </html>
