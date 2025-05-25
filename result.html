@@ -4,18 +4,18 @@
         <meta charset="UTF-8"/>
         <title>Your Dream Pattern</title>
         <style>
-            /* MODIFIED: Updated @font-face for Reader Pro */
+            /* Custom Font Definition */
             @font-face { 
                 font-family: 'Reader Pro'; 
                 src: url('/fonts/ReaderPro-Regular.woff2') format('woff2'),
                      url('/fonts/ReaderPro-Regular.ttf') format('truetype'); 
-                font-weight: normal; /* This definition is for the 'normal' weight */
+                font-weight: normal; 
                 font-style: normal; 
             } 
             html, body { 
                 width: 100%; 
                 height: 100%; 
-                font-family: 'Reader Pro', sans-serif; /* Reader Pro is now the base */
+                font-family: 'Reader Pro', sans-serif; 
                 background: #000; 
                 color: #fff; 
                 overflow: hidden; 
@@ -48,8 +48,8 @@
                 font-size: 22px; 
                 margin-bottom: 1rem; 
                 flex-shrink: 0; 
-                font-family: 'Reader Pro', sans-serif; /* MODIFIED */
-                font-weight: bolder; /* Browser synthesizes if bold file not defined for 'Reader Pro' */
+                font-family: 'Reader Pro', sans-serif; 
+                font-weight: bolder; 
             } 
             .section-container { 
                 display: flex; 
@@ -60,21 +60,21 @@
             .box { 
                 flex: 1; 
                 padding: 0; 
-                font-family: 'Reader Pro', sans-serif; /* MODIFIED */
+                font-family: 'Reader Pro', sans-serif; 
                 white-space: pre-wrap; 
             } 
-            .descriptive-text { /* Added from previous for lighter text, uses Reader Pro */
+            .descriptive-text { 
                 font-weight: 300; 
                 display: block; 
             }
             .detailed-analysis-scrollable { 
-                font-family: 'Reader Pro', sans-serif; /* MODIFIED */
+                font-family: 'Reader Pro', sans-serif; 
                 line-height: 1.4em; 
                 height: calc(10 * 1.4em); 
                 overflow-y: auto; 
                 white-space: pre-wrap; 
                 border: none; 
-                font-weight: 300; /* Browser synthesizes if light file not defined */
+                font-weight: 300; 
             } 
             .symbols { 
                 display: flex; 
@@ -90,7 +90,7 @@
             .symbol-text-label { 
                 margin-bottom: 8px; 
                 text-transform: uppercase; 
-                font-weight: 300; /* Browser synthesizes if light file not defined */
+                font-weight: 300; 
                 font-size: 11px; 
             } 
             .symbol-box img { 
@@ -147,13 +147,12 @@
                 border: 1px solid transparent; 
                 cursor: pointer; 
                 border-radius: 606.25rem; 
-                font-weight: 600; /* Browser synthesizes if 600 weight file not defined for 'Reader Pro' */
+                font-weight: 600; 
                 z-index: 10; 
                 user-select: none; 
                 transition: background-color 0.2s, color 0.2s, border-color 0.2s; 
                 width: 260px; 
                 height: 60px; 
-                /* font-family will be 'Reader Pro' by inheritance */
             } 
             button:hover { 
                 background: #000; 
@@ -161,7 +160,6 @@
                 border-color: #fff; 
             }
         </style>
-        <link href="css/theme.css" rel="stylesheet" type="text/css">
         </head>
     <body>
         <div class="left">
@@ -179,9 +177,6 @@
             <div id="svgContainer"></div>
         </div>
         <script>
-    // All JavaScript remains exactly as you provided in your last message
-    // (customColorMap, helper functions, getHexColorInterpretation, 
-    //  localStorage logic, and DOM population including SVG handling)
     const svgContainer = document.getElementById("svgContainer");
     const colourGradientBox = document.getElementById("colourGradientBox");
     const realismBox = document.getElementById("realismBox");
@@ -295,21 +290,23 @@
         const startColorInfo = getHexColorInterpretation(startColorHex);
         const endColorInfo = getHexColorInterpretation(endColorHex);
         
+        // MODIFIED: Moved EMOTION data to colourGradientBox
         if (colourGradientBox) { 
             colourGradientBox.innerHTML = `COLOUR AND GRADIENT
 <div class="descriptive-text">Start Color: ${startColorHex} (${startColorInfo.name})
   Interpretation: ${startColorInfo.description}
 
 End Color: ${endColorHex} (${endColorInfo.name})
-  Interpretation: ${endColorInfo.description}</div>`;
+  Interpretation: ${endColorInfo.description}</div>
+
+EMOTION
+<span class="descriptive-text">${analysis.emotion || "N/A"}</span>`;
         }
         
+        // MODIFIED: Removed EMOTION data from realismBox
         if (realismBox) { 
             realismBox.innerHTML = `REALISM ASSESSMENT
 <span class="descriptive-text">${analysis.realismAssessment || "N/A"}</span>
-
-EMOTION
-<span class="descriptive-text">${analysis.emotion || "N/A"}</span>
 
 DETAILED ANALYSIS
 <div class="detailed-analysis-scrollable">${analysis.analysis || "N/A"}</div>`;
@@ -330,6 +327,7 @@ DETAILED ANALYSIS
     } else { 
         const defaultMessage = "Dream analysis data could not be loaded. Please try analyzing a dream again.";
         if (colourGradientBox) colourGradientBox.textContent = defaultMessage;
+        // if (emotionBox) emotionBox.textContent = ""; // Not needed as emotion is part of colourGradientBox now
         if (svgContainer && !svg) { svgContainer.innerHTML = "No SVG pattern found."; } 
         else if (svgContainer && (!analysis || Object.keys(analysis).length === 0 )) { svgContainer.innerHTML = "";}
         if (realismBox) realismBox.innerHTML = ""; 
@@ -338,6 +336,7 @@ DETAILED ANALYSIS
         const titlesInLeftPanel = document.querySelectorAll('.left > .title, .left > h1');
         titlesInLeftPanel.forEach(t => {
             if(Object.keys(analysis).length === 0 && t.textContent.trim() === "DREAM ANALYSIS" && t.classList.contains('title')) {
+                // Main .title "DREAM ANALYSIS" is kept visible
             } else if (Object.keys(analysis).length === 0 && t.tagName === 'H1') { 
                  t.style.display = 'none'; 
             }
