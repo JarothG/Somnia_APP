@@ -8,8 +8,154 @@
         <script type="module" crossorigin src="/assets/index-BMBsDeFx.js"></script>
         <link href="css/theme.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" crossorigin href="/assets/index-BoKK2JHz.css"/>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Readex+Pro&display=swap">
-        <style>html { height: 100%; } body { margin: 0; font-family: 'Readex Pro', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100%; background-color: #000;  /* MODIFIED: Fully black background */ color: white; } .main-container { display: flex; flex-direction: column; align-items: center; width: 95%;  /* MODIFIED: Slightly wider percentage */ max-width: 700p;  /* MODIFIED: Increased max-width for less narrowness */ padding: 20px;  /* Reverted to 20px padding as 40px might make content box too small with wider text area */ box-sizing: border-box;  /* Removed background-color and border-radius from here, can be added back if desired */ } #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: black; display: none; z-index: 9999; align-items: center; justify-content: center; flex-direction: column; } #overlay p { color: white; font-size: 55pt; margin: 0 0 40px 0; user-select: none; text-align: center; padding-bottom: 28px; } #logoChanging { width: 100px; height: auto; user-select: none; } #renderDreamBtn { text-transform: uppercase; padding: 20px; font-size: 15px; cursor: pointer; background: white; border: none; color: black; transition: all 0.3s ease; border-radius: 9999px; font-weight: 100; margin-top: 20px; } #renderDreamBtn:hover { background-color: black; color: white; border: 2px solid white; } #dreamInput { resize: none; width: 100%; box-sizing: border-box; font-weight: normal; font-family: 'Readex Pro', sans-serif;  /* If 55pt is working due to !important, investigate external CSS overrides */ font-size: 55pt !important; line-height: 1.2; text-align: center; color: #333; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 10px; padding: 25px 20px 15px 20px; height: 304px; } #dreamInput::placeholder { color: #aaa; text-align: center; font-size: 55pt; font-family: 'Readex Pro', sans-serif; font-weight: normal; line-height: 1.2; } .loading-indicator { display: none; text-align: center; margin-top: 20px; color: white; } .spinner { border: 4px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: #fff; width: 40px; height: 40px; animation: spin 1s ease-infinite; margin: 0 auto 10px auto; } @keyframes spin { to {  transform: rotate(360deg); } } .grid-container, .analysis-container { display: none; margin-top: 20px; } #downloadBtn { text-transform: uppercase; padding: 15px; font-size: 14px; cursor: pointer; background: white; border: none; color: black; transition: all 0.3s ease; border-radius: 9999px; font-weight: 100; margin-top: 20px; } #downloadBtn:hover { background-color: black; color: white; border: 2px solid white; }</style>
+        <style>
+            /* MODIFIED: Added @font-face for Reader Pro */
+            @font-face { 
+                font-family: 'Reader Pro'; 
+                src: url('/fonts/ReaderPro-Regular.woff2') format('woff2'),
+                     url('fonts/ReaderPro-Regular.ttf') format('truetype'); 
+                font-weight: normal; /* Assuming this file is for normal weight */
+                font-style: normal; 
+            }
+            html { 
+                height: 100%; 
+            } 
+            body { 
+                margin: 0; 
+                font-family: 'Reader Pro', sans-serif; /* MODIFIED: Use Reader Pro as base */
+                display: flex; 
+                flex-direction: column; 
+                align-items: center;    
+                justify-content: center; 
+                min-height: 100%;      
+                background-color: #000; 
+                color: white; 
+            } 
+            .main-container { 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                width: 95%;          
+                max-width: 700px; 
+                padding: 20px; 
+                box-sizing: border-box; 
+            } 
+            #overlay { 
+                position: fixed; 
+                top: 0; 
+                left: 0; 
+                width: 100%; 
+                height: 100%; 
+                background-color: black; 
+                display: none; 
+                z-index: 9999; 
+                align-items: center; 
+                justify-content: center; 
+                flex-direction: column; 
+            } 
+            #overlay p { 
+                color: white; 
+                font-size: 55pt; 
+                margin: 0 0 40px 0; 
+                user-select: none; 
+                text-align: center; 
+                padding-bottom: 28px; 
+                font-family: 'Reader Pro', sans-serif; /* MODIFIED: Ensure Reader Pro */
+            } 
+            #logoChanging { 
+                width: 100px; 
+                height: auto; 
+                user-select: none; 
+            } 
+            #renderDreamBtn { 
+                text-transform: uppercase; 
+                padding: 20px; 
+                font-size: 15px; 
+                cursor: pointer; 
+                background: white; 
+                border: none; 
+                color: black; 
+                transition: all 0.3s ease; 
+                border-radius: 9999px; 
+                font-weight: 100; 
+                margin-top: 20px; 
+                font-family: 'Reader Pro', sans-serif; /* MODIFIED: Ensure Reader Pro */
+            } 
+            #renderDreamBtn:hover { 
+                background-color: black; 
+                color: white; 
+                border: 2px solid white; 
+            } 
+            #dreamInput { 
+                resize: none; 
+                width: 100%; 
+                box-sizing: border-box; 
+                font-weight: normal; 
+                font-family: 'Reader Pro', sans-serif; /* MODIFIED */
+                font-size: 55pt !important; 
+                line-height: 1.2; 
+                text-align: center; 
+                color: #333; 
+                background-color: #f0f0f0; 
+                border: 1px solid #ccc; 
+                border-radius: 10px; 
+                padding: 25px 20px 15px 20px; 
+                height: 304px; 
+            } 
+            #dreamInput::placeholder { 
+                color: #aaa; 
+                text-align: center; 
+                font-size: 55pt; 
+                font-family: 'Reader Pro', sans-serif; /* MODIFIED */
+                font-weight: normal; 
+                line-height: 1.2; 
+            } 
+            .loading-indicator { 
+                display: none; 
+                text-align: center; 
+                margin-top: 20px; 
+                color: white; 
+                font-family: 'Reader Pro', sans-serif; /* MODIFIED */
+            } 
+            .loading-indicator p { /* Will inherit Reader Pro */
+                /* font-family is inherited */
+            }
+            .spinner { 
+                border: 4px solid rgba(255, 255, 255, 0.3); 
+                border-radius: 50%; 
+                border-top-color: #fff; 
+                width: 40px; 
+                height: 40px; 
+                animation: spin 1s ease-infinite; 
+                margin: 0 auto 10px auto; 
+            } 
+            @keyframes spin { 
+                to {  transform: rotate(360deg); } 
+            } 
+            .grid-container, .analysis-container { 
+                display: none; 
+                margin-top: 20px; 
+            } 
+            #downloadBtn { 
+                text-transform: uppercase; 
+                padding: 15px; 
+                font-size: 14px; 
+                cursor: pointer; 
+                background: white; 
+                border: none; 
+                color: black; 
+                transition: all 0.3s ease; 
+                border-radius: 9999px; 
+                font-weight: 100; 
+                margin-top: 20px; 
+                font-family: 'Reader Pro', sans-serif; /* MODIFIED */
+            } 
+            #downloadBtn:hover { 
+                background-color: black; 
+                color: white; 
+                border: 2px solid white; 
+            }
+        </style>
     </head>
     <body>
         <div class="main-container">
@@ -20,6 +166,7 @@
             </div>
             <button id="renderDreamBtn">Generate your dream pattern</button>
         </div>
+
         <div class="grid-container">
             <svg id="grid" width="800" height="1000" xmlns="http://www.w3.org/2000/svg" style="background-color: #ffffff;">
                 <defs>
@@ -31,12 +178,17 @@
             </svg>
             <button id="downloadBtn">Download as Vector PDF</button>
         </div>
+        
         <div class="analysis-container" id="analysisContainer"></div>
+        
         <div id="overlay">
             <p>Your pattern is generating...</p> 
             <img id="logoChanging" src="/Loading_Logo2/loading%20(1).svg" alt="Loading Icon"/>
         </div>
+        
         <script>
+    // Your JavaScript (iconPaths, setInterval, renderDreamBtn event listener, etc.)
+    // remains exactly as you provided it.
     const iconPaths = [
         "/Loading_Logo2/loading%20(1).svg",
         "/Loading_Logo2/loading%20(2).svg",
